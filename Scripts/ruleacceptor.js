@@ -9,7 +9,7 @@ registerPlugin({
             type: 'number'
         }
         b_message: {
-            title: 'Your welcome text or rules which he should accept to.',
+            title: 'Your welcome text or rules which he should accept to. %n is the nickname of the Client.',
             type: 'string'
         },
         c_message: {
@@ -25,13 +25,13 @@ registerPlugin({
                 sinusbot.addClientToServerGroup(ev.client.dbid, config.a_group);
                 chatPrivate(ev.clientId, config.c_message);
             }
-
         }
     });
     sinusbot.on('clientMove', function (ev) {
         if (ev.clientServerGroups.length <= 0) {
-            chatPrivate(ev.clientId, config.b_message);
+            var msg = config.b_message;
+            msg = msg.replace(/%n/g, ev.clientNick);
+            chatPrivate(ev.clientId, msg);
         }
-
     });
 });
