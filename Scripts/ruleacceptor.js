@@ -1,6 +1,6 @@
 registerPlugin({
     name: 'Ruleacceptor',
-    version: '1.0',
+    version: '1.1',
     description: 'Ruleacceptor',
     author: 'MaxS <info@schmitt-max.com',
     vars: {
