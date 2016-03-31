@@ -1,6 +1,6 @@
 registerPlugin({
     name: 'Ruleacceptor',
-    version: '1.2',
+    version: '1.3',
     description: 'Ruleacceptor',
     author: 'MaxS <info@schmitt-max.com>',
     vars: {
@@ -9,7 +9,7 @@ registerPlugin({
             type: 'number'
         },
         a_groupen2: {
-            title: '2nd group ID EN',
+            title: '2nd group ID EN.',
             type: 'number'
         },
         a_groupde1: {
@@ -17,7 +17,7 @@ registerPlugin({
             type: 'number'
         },
         a_groupde2: {
-            title: '2nd group ID DE',
+            title: '2nd group ID DE.',
             type: 'number'
         },
         b_message: {
@@ -34,9 +34,6 @@ registerPlugin({
         }
     }
 }, function (sinusbot, config) {
-    if (!isset(userdb)) {
-        var db = {};
-    }
     sinusbot.on('chat', function (ev) {
         if (ev.msg == '!accept de') {
             sinusbot.addClientToServerGroup(ev.client.dbid, config.a_groupde1);
@@ -56,4 +53,29 @@ registerPlugin({
             chatPrivate(ev.clientId, msg);
         }
     });
+    sinusbot.on('clientServergroupAdd', function (ev) {
+        if ((hasgroup(config.a_groupen1) && hasgroup(config.a_groupde1)) == true) {
+            sinusbot.removeClientFromServerGroup(ev.client.dbid, config.a_groupen1);
+            sinusbot.removeClientFromServerGroup(ev.client.dbid, config.a_groupde1);
+        }
+
+
+        function hasgroup(groupid) {
+
+            var tmp = []
+            for (var i = 0; i < ev.client.groups.length; i++) {
+                tmp[i] = ev.client.groups[i]['i'];
+            }
+            for (var i = 0; i < tmp.length; i++) {
+                if (tmp[i] == groupid) {
+                    var tmp = []
+                    return true;
+                }
+            }
+            if (tmp.length == ev.client.groups.length) {
+                return false;
+            }
+        }
+    });
+
 });
