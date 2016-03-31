@@ -2,7 +2,7 @@ registerPlugin({
     name: 'Ruleacceptor',
     version: '1.2',
     description: 'Ruleacceptor',
-    author: 'MaxS <info@schmitt-max.com',
+    author: 'MaxS <info@schmitt-max.com>',
     vars: {
         a_groupen1: {
             title: '1st group ID EN.',
@@ -13,7 +13,7 @@ registerPlugin({
             type: 'number'
         },
         a_groupde1: {
-            title: '1st group ID DE..',
+            title: '1st group ID DE.',
             type: 'number'
         },
         a_groupde2: {
