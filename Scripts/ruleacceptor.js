@@ -1,6 +1,6 @@
 registerPlugin({
     name: 'Ruleacceptor',
-    version: '1.3',
+    version: '1.4',
     description: 'Ruleacceptor',
     author: 'MaxS <info@schmitt-max.com>',
     vars: {
@@ -47,7 +47,7 @@ registerPlugin({
         }
     });
     sinusbot.on('clientMove', function (ev) {
-        if ((ev.clientServerGroups.length) === 0) {
+        if ((hasgroup(config.a_groupen1) && hasgroup(config.a_groupde1)) == false) {
             var msg = config.b_message;
             msg = msg.replace(/%n/g, ev.clientNick);
             chatPrivate(ev.clientId, msg);
@@ -59,9 +59,7 @@ registerPlugin({
             sinusbot.removeClientFromServerGroup(ev.client.dbid, config.a_groupde1);
         }
 
-
         function hasgroup(groupid) {
-
             var tmp = []
             for (var i = 0; i < ev.client.groups.length; i++) {
                 tmp[i] = ev.client.groups[i]['i'];
