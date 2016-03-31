@@ -1,6 +1,6 @@
 registerPlugin({
     name: 'Ruleacceptor',
-    version: '1.4',
+    version: '1.5',
     description: 'Ruleacceptor',
     author: 'MaxS <info@schmitt-max.com>',
     vars: {
@@ -35,30 +35,35 @@ registerPlugin({
     }
 }, function (sinusbot, config) {
     sinusbot.on('chat', function (ev) {
-        if (ev.msg == '!accept de') {
-            sinusbot.addClientToServerGroup(ev.client.dbid, config.a_groupde1);
-            sinusbot.addClientToServerGroup(ev.client.dbid, config.a_groupde2);
-            chatPrivate(ev.clientId, config.c_messagede);
+        if ((ev.clientServerGroups.length) === 0) {
+            if (ev.msg == '!accept de') {
+                sinusbot.addClientToServerGroup(ev.client.dbid, config.a_groupde1);
+                sinusbot.addClientToServerGroup(ev.client.dbid, config.a_groupde2);
+                chatPrivate(ev.clientId, config.c_messagede);
+            }
         }
-        if (ev.msg == '!accept en') {
-            sinusbot.addClientToServerGroup(ev.client.dbid, config.a_groupen1);
-            sinusbot.addClientToServerGroup(ev.client.dbid, config.a_groupen2);
-            chatPrivate(ev.clientId, config.c_messageen);
+        if ((ev.clientServerGroups.length) === 0) {
+            if (ev.msg == '!accept en') {
+                sinusbot.addClientToServerGroup(ev.client.dbid, config.a_groupen1);
+                sinusbot.addClientToServerGroup(ev.client.dbid, config.a_groupen2);
+                chatPrivate(ev.clientId, config.c_messageen);
+            }
         }
     });
     sinusbot.on('clientMove', function (ev) {
-        if ((hasgroup(config.a_groupen1) && hasgroup(config.a_groupde1)) == false) {
+        if ((ev.clientServerGroups.length) === 0) {
             var msg = config.b_message;
             msg = msg.replace(/%n/g, ev.clientNick);
             chatPrivate(ev.clientId, msg);
         }
+
     });
     sinusbot.on('clientServergroupAdd', function (ev) {
         if ((hasgroup(config.a_groupen1) && hasgroup(config.a_groupde1)) == true) {
             sinusbot.removeClientFromServerGroup(ev.client.dbid, config.a_groupen1);
             sinusbot.removeClientFromServerGroup(ev.client.dbid, config.a_groupde1);
         }
-
+        //----------------START FUNCTION-------------------------- 
         function hasgroup(groupid) {
             var tmp = []
             for (var i = 0; i < ev.client.groups.length; i++) {
@@ -74,6 +79,7 @@ registerPlugin({
                 return false;
             }
         }
+        //----------------END FUNCTION--------------------------
     });
 
 });
