@@ -1,6 +1,6 @@
 registerPlugin({
     name: 'Ruleacceptor',
-    version: '1.5',
+    version: '1.6',
     description: 'Ruleacceptor',
     author: 'MaxS <info@schmitt-max.com>',
     vars: {
@@ -21,8 +21,8 @@ registerPlugin({
             type: 'number'
         },
         b_message: {
-            title: 'Your welcome text or rules which he should accept to. %n is the nickname of the Client.',
-            type: 'string'
+            title: 'Your welcome text or rules which he should accept to. %n is the nickname of the Client, %p is a line break.',
+            type: 'multiline'
         },
         c_messageen: {
             title: ' The EN text, after the client, gets the group.',
@@ -54,6 +54,7 @@ registerPlugin({
         if ((ev.clientServerGroups.length) === 0) {
             var msg = config.b_message;
             msg = msg.replace(/%n/g, ev.clientNick);
+            msg = msg.replace(/%p/g, '\n');
             chatPrivate(ev.clientId, msg);
         }
 
