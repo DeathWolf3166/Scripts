@@ -9,7 +9,7 @@ registerPlugin({
             type: 'number'
         },
         a_groupen2: {
-            title: '2nd group ID EN,
+            title: '2nd group ID EN',
             type: 'number'
         },
         a_groupde1: {
@@ -34,6 +34,9 @@ registerPlugin({
         }
     }
 }, function (sinusbot, config) {
+    if (!isset(userdb)) {
+        var db = {};
+    }
     sinusbot.on('chat', function (ev) {
         if (ev.msg == '!accept de') {
             sinusbot.addClientToServerGroup(ev.client.dbid, config.a_groupde1);
