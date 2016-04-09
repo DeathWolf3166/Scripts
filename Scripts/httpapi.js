@@ -33,3 +33,4 @@ registerPlugin({
     }
   });
 });
+//Idea with the structure of the code is from @Xuxe
