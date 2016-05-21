@@ -2,7 +2,7 @@ registerPlugin({
   name: 'ChatGroupAssigner',
   version: '1.0',
   description: 'Adds a Group to a user, when he writes a specific message to the Bot',
-  author: 'MaxS <max@schmitt.ovh>',
+  author: 'maxibanki <max@schmitt.ovh>',
   vars: {
     a_group: {
       title: 'Group, which should be assigned.',
